@@ -39,27 +39,40 @@ local ts = token('timestamp', l.digit * l.digit * l.digit * l.digit * -- year
                                 S(' \t')^0 * S('-+') * l.digit * l.digit^-1 *
                                 (':' * l.digit * l.digit)^-1)^-1)^-1)
 
--- Constants.
-local constant = token(l.CONSTANT,
-                       word_match({'true', 'false'}, nil, true))
+-- kewwords.
+local keyword = token(l.KEYWORD, word_match{
+  'true', 'false'
+})
+
+
+-- Identifiers.
+local identifier = token(l.IDENTIFIER, l.word)
+
+-- Labels.
+local label = token(l.LABEL, '::' * l.word * '::')
+
+-- Operators.
+local operator = token(l.OPERATOR, S('#=+-,.{}[]()'))
+
 M._rules = {
   {'indent', indent},
   {'whitespace', ws},
+  {'keyword', keyword},
+  {'identifier', identifier},
+  {'operator', operator},
+  {'string', string},
   {'comment', comment},
+  {'number', number},
   {'timestamp', ts},
   {'number', number},
-  {'constant', constant},
 }
 
 M._tokenstyles = {
   indent_error = 'back:%(color.red)',
-  document = l.STYLE_CONSTANT,
   timestamp = l.STYLE_NUMBER,
-  tag = l.STYLE_CLASS,
-  directive = l.STYLE_PREPROCESSOR,
 }
 
 l.property['fold.by.indentation'] = '1'
 
 
-return m
+return M
