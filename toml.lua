@@ -42,3 +42,24 @@ local ts = token('timestamp', l.digit * l.digit * l.digit * l.digit * -- year
 -- Constants.
 local constant = token(l.CONSTANT,
                        word_match({'true', 'false'}, nil, true))
+M._rules = {
+  {'indent', indent},
+  {'whitespace', ws},
+  {'comment', comment},
+  {'timestamp', ts},
+  {'number', number},
+  {'constant', constant},
+}
+
+M._tokenstyles = {
+  indent_error = 'back:%(color.red)',
+  document = l.STYLE_CONSTANT,
+  timestamp = l.STYLE_NUMBER,
+  tag = l.STYLE_CLASS,
+  directive = l.STYLE_PREPROCESSOR,
+}
+
+l.property['fold.by.indentation'] = '1'
+
+
+return m
