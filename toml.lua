@@ -1,11 +1,10 @@
 --- TOML LPeg lexer.
--- Used yaml.lua for reference.
+-- Used yaml.lua and lua.lua for reference.
 -- @module toml
 -- @author Alejandro Baez
 -- @license MIT
 
-local l = require("lexer")
-local token, word_match = l.token, l.word_match
+local l, token, word_match = lexer, lexer.token, lexer.word_match
 local P, R, S = lpeg.P, lpeg.R, lpeg.S
 
 local M = {_NAME = 'toml'}
@@ -22,9 +21,7 @@ local comment = token(l.COMMENT, '#' * l.nonnewline^0)
 local string = token(l.STRING, l.delimited_range("'") + l.delimited_range('"'))
 
 -- Numbers.
-local integer = l.dec_num + l.hex_num + '0' * S('oO') * R('07')^1
-local special_num = '.' * word_match({'inf', 'nan'}, nil, true)
-local number = token(l.NUMBER, special_num + l.float + integer)
+local number = token(l.NUMBER, l.float + l.integer)
 
 -- Datetime.
 local ts = token('timestamp', l.digit * l.digit * l.digit * l.digit * -- year
@@ -48,9 +45,6 @@ local keyword = token(l.KEYWORD, word_match{
 -- Identifiers.
 local identifier = token(l.IDENTIFIER, l.word)
 
--- Labels.
-local label = token(l.LABEL, '::' * l.word * '::')
-
 -- Operators.
 local operator = token(l.OPERATOR, S('#=+-,.{}[]()'))
 
@@ -64,7 +58,6 @@ M._rules = {
   {'comment', comment},
   {'number', number},
   {'timestamp', ts},
-  {'number', number},
 }
 
 M._tokenstyles = {

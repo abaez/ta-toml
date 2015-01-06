@@ -8,7 +8,7 @@ textadept.file_types.extensions.toml = 'toml'
 textadept.editing.comment_string.toml = '#'
 
 if type(snippets) == 'table' then
-  snippets.rust = require("modules.toml.snippets")
+  snippets.toml = require("modules.toml.snippets")
 end
 
 events.connect(events.LEXER_LOADED, function (lang)
@@ -19,5 +19,5 @@ events.connect(events.LEXER_LOADED, function (lang)
 end)
 
 return {
-  rs = 'rust'
+  toml = 'toml'
 }
