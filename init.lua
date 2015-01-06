@@ -1,8 +1,8 @@
---- the Textadept initializer for the Toml module
--- See @{README.md} for details on usage.
+--- the Textadept initializer for the Toml module.
 -- @author Alejandro Baez <alejan.baez@gmail.com>
 -- @copyright 2015
 -- @license MIT (see LICENSE)
+-- @module init
 
 textadept.file_types.extensions.toml = 'toml'
 textadept.editing.comment_string.toml = '#'

@@ -1,3 +1,9 @@
+--- TOML snippets.
+-- @author Alejandro Baez <alejan.baez@gmail.com>
+-- copyright 2015
+-- @license MIT (see LICENSE)
+-- @module toml
+
 return {
   -- random
   ["d"]     = "%1(year)-%2(month)-%3(day)T%4(time)",
