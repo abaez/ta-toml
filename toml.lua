@@ -67,7 +67,8 @@ M._tokenstyles = {
   timestamp = l.STYLE_NUMBER,
 }
 
-l.property['fold.by.indentation'] = '1'
+M._FOLDBYINDENTATION = true
+
 
 
 return M
