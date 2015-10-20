@@ -2,7 +2,7 @@
 ## A [TOML](https://github.com/toml-lang/toml) module and lexer for [Textadept](http://foicica.com/textadept/).
 
 ### DESCRIPTION
-A quick lexer for the Tom's Obvious, Minimal Language. Using [TOML v0.3.1](https://github.com/toml-lang/toml/tree/v0.3.1)
+A quick lexer for the Tom's Obvious, Minimal Language. Using [TOML v0.4.0](https://github.com/toml-lang/toml/tree/v0.4.0)
 spec sheet.
 
 ### INSTALL
