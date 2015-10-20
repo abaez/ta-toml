@@ -20,7 +20,12 @@ local ws = token(l.WHITESPACE, S(' \t')^1 + l.newline^1)
 local comment = token(l.COMMENT, '#' * l.nonnewline_esc^0)
 
 -- Strings.
-local string = token(l.STRING, l.delimited_range("'") + l.delimited_range('"'))
+local dq_str = P('U')^-1 * l.delimited_range('"', true)
+local raw_sq_str = P('u')^-1 * l.delimited_range("'", false, false)
+local multi_dq_str = '"""' * (l.any - '"""')^0 * P('"""')^-1
+local multi_raw_sq_str = "'''" * (l.any - "'''")^0 * P("'''")^-1
+local string = token(l.STRING, multi_raw_sq_str + multi_dq_str +
+                               raw_sq_str + dq_str)
 
 -- Numbers.
 local number = token(l.NUMBER, l.float + l.integer)
