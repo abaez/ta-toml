@@ -17,7 +17,7 @@ local indent = #l.starts_line(S(' \t')) *
 local ws = token(l.WHITESPACE, S(' \t')^1 + l.newline^1)
 
 -- Comments.
-local comment = token(l.COMMENT, '#' * l.nonnewline^0)
+local comment = token(l.COMMENT, '#' * l.nonnewline_esc^0)
 
 -- Strings.
 local string = token(l.STRING, l.delimited_range("'") + l.delimited_range('"'))
