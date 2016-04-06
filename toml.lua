@@ -48,28 +48,32 @@ local keyword = token(l.KEYWORD, word_match{
   'true', 'false'
 })
 
-
 -- Identifiers.
 local identifier = token(l.IDENTIFIER, l.word)
 
 -- Operators.
 local operator = token(l.OPERATOR, S('#=+-,.{}[]()'))
 
+-- table
+local tab = token("table", S'['^1 * (l.word  + S'.')^1 * S']'^1 )
+
 M._rules = {
   {'indent', indent},
   {'whitespace', ws},
   {'comment', comment},
-  {'timestamp', ts},
   {'keyword', keyword},
-  {'operator', operator},
+  {'timestamp', ts},
   {'string', string},
   {'number', number},
+  {'table', tab},
+  {'operator', operator},
   {'identifier', identifier},
 }
 
 M._tokenstyles = {
   indent_error = 'back:%(color.red)',
   timestamp = l.STYLE_NUMBER,
+  table = l.STYLE_LABEL
 }
 
 M._FOLDBYINDENTATION = true
