@@ -1,7 +1,7 @@
 --- TOML LPeg lexer.
 -- Used yaml.lua and lua.lua for reference.
--- @author [Alejandro Baez](https://twitter.com/a_baez)
--- copyright 2015
+-- @author [Alejandro Baez](https://keybase.io/baez)
+-- copyright 2016
 -- @license MIT (see LICENSE)
 -- @module toml
 
@@ -53,13 +53,13 @@ local operator = token(l.OPERATOR, S('#=+-,.{}[]()'))
 M._rules = {
   {'indent', indent},
   {'whitespace', ws},
+  {'comment', comment},
+  {'timestamp', ts},
   {'keyword', keyword},
-  {'identifier', identifier},
   {'operator', operator},
   {'string', string},
-  {'comment', comment},
   {'number', number},
-  {'timestamp', ts},
+  {'identifier', identifier},
 }
 
 M._tokenstyles = {
@@ -67,7 +67,6 @@ M._tokenstyles = {
   timestamp = l.STYLE_NUMBER,
 }
 
-l.property['fold.by.indentation'] = '1'
-
+M._FOLDBYINDENTATION = true
 
 return M
